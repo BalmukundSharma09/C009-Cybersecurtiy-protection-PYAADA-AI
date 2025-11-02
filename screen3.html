@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PYAADA.AI - Incident #001</title>
+    <style>
+        /* --- Basic Setup (Red & Black Theme) --- */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #111111; /* Black Background */
+            color: #e0e0e0; /* Light Text */
+        }
+
+        /* --- Main Layout --- */
+        .container {
+            padding: 24px;
+            max-width: 1400px; /* Wider for this complex view */
+            margin: 0 auto;
+        }
+
+        /* --- Header --- */
+        .header {
+            border-bottom: 2px solid #333;
+            padding-bottom: 16px;
+            margin-bottom: 24px;
+        }
+        .header h1 {
+            color: #d9534f; /* PYAADA.AI Red */
+            margin: 0;
+            font-size: 2.2em;
+        }
+        .header h2 {
+            margin: 0;
+            font-weight: 400;
+            font-size: 1.4em;
+            color: #aaa;
+        }
+        
+        /* --- Main Grid Layout (2-Column) --- */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr; /* 2/3 column for main, 1/3 for playbook */
+            gap: 24px;
+        }
+
+        /* --- Widget Base Style --- */
+        .widget {
+            background-color: #1a1a1a; /* Dark Card */
+            border: 1px solid #333;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            overflow: hidden; /* To contain tables/visuals */
+        }
+        .widget-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid #333;
+            background-color: #222222; /* Darker header */
+        }
+        .widget-header h3 {
+            margin: 0;
+            font-size: 1.2em;
+            color: #d9534f; /* Red header text */
+        }
+        .widget-body {
+            padding: 20px;
+        }
+
+        /* --- WIDGET 1: AI Context Engine --- */
+        .ai-summary {
+            font-size: 1.1em;
+            line-height: 1.7;
+            color: #e0e0e0;
+        }
+        .ai-summary strong {
+            color: #d9534f; /* Red highlights */
+        }
+
+        /* --- WIDGET 2: Kill Chain Visualization --- */
+        .kill-chain {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+        .chain-node {
+            text-align: center;
+            flex: 1;
+        }
+        .chain-node .icon {
+            font-size: 2.5em;
+        }
+        .chain-node p {
+            margin: 4px 0 0 0;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        .chain-node span {
+            font-size: 0.9em;
+            color: #aaa;
+        }
+        .chain-arrow {
+            font-size: 2.5em;
+            color: #666; /* Muted arrow */
+            flex-basis: 50px;
+            text-align: center;
+        }
+
+        /* --- WIDGET 3: Automated Playbook (The Solution) --- */
+        .playbook-widget {
+            border-left: 4px solid #d9534f; /* Red highlight */
+        }
+        .playbook-step {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            padding: 12px;
+            border: 1px solid #333;
+            border-radius: 6px;
+            background-color: #222;
+        }
+        .playbook-step .step-info {
+            flex-grow: 1;
+        }
+        .playbook-step .step-info p {
+            margin: 0;
+            font-weight: 500;
+            color: #ffffff;
+        }
+        .playbook-step .step-info span {
+            font-size: 0.9em;
+            color: #aaa;
+        }
+        .playbook-button {
+            background-color: #d9534f; /* PYAADA.AI Red */
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.9em;
+            font-weight: bold;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: background-color 0.2s ease;
+            white-space: nowrap;
+            margin-left: 12px;
+        }
+        .playbook-button:hover {
+            background-color: #054915; /* Dark green for Execute */
+        }
+        .playbook-button.btn-success:hover {
+            background-color: #28a745; /* Bright Green on hover */
+            color: #ffffff;
+        }
+
+        /* --- WIDGET 4: Correlated Evidence (Tabs) --- */
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #333;
+            background-color: #222;
+        }
+        .tab {
+            padding: 12px 18px;
+            cursor: pointer;
+            font-weight: 500;
+            color: #aaa;
+            border-bottom: 3px solid transparent;
+        }
+        .tab.active {
+            color: #d9534f; /* Active tab is Red */
+            border-bottom: 3px solid #d9534f;
+        }
+        .tab-content {
+            padding: 20px;
+        }
+        .evidence-list li {
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+        .evidence-list li code {
+            background-color: #333;
+            color: #e0e0e0;
+            padding: 2px 5px;
+            border-radius: 4px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>Incident #001: Suspected Zero-Day Exploit</h1>
+            <h2>Automated Investigation by PYAADA.AI</h2>
+        </div>
+
+        <div class="main-grid">
+
+            <div class="left-column">
+                
+                <div class="widget">
+                    <div class="widget-header">
+                        <h3>AI Context Engine (Generative Summary)</h3>
+                    </div>
+                    <div class="widget-body">
+                        <p class="ai-summary">
+                            This is a <strong>high-confidence attack</strong>. The kill chain began with a <strong>behavioral anomaly</strong> on `VPN-Gateway` matching a <strong>zero-day exploit</strong> pattern. The attacker has moved to `AD-Server` and is attempting privilege escalation. All activity is linked from a combined list of <strong>updated IOCs</strong>. Attacker has attempted to wipe local logs, but <strong>centralized logs are secure</strong>.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="widget" style="margin-top: 24px;">
+                    <div class="widget-header">
+                        <h3>Reconstructed Kill Chain</h3>
+                    </div>
+                    <div class="widget-body kill-chain">
+                        <div class="chain-node">
+                            <div class="icon">💻</div>
+                            <p>External IP</p>
+                            <span>172.217.14.228</span>
+                        </div>
+                        <div class="chain-arrow">→</div>
+                        <div class="chain-node">
+                            <div class="icon">🛡️</div>
+                            <p>VPN-Gateway</p>
+                            <span>Initial Access</span>
+                        </div>
+                        <div class="chain-arrow">→</div>
+                        <div class="chain-node">
+                            <div class="icon">📦</div>
+                            <p>AD-Server</p>
+                            <span>Privilege Escalation</span>
+                        </div>
+                        <div class="chain-arrow">→</div>
+                        <div class="chain-node">
+                            <div class="icon">🖥️</div>
+
+                            <p>Workstation-102</p>
+                            <span>Staging</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="widget" style="margin-top: 24px;">
+                    <div class="tabs">
+                        <div class="tab active" onclick="showTab('anomalies')">Behavioral Anomalies</div>
+                        <div class="tab" onclick="showTab('alerts')">Linked Alerts</div>
+                        <div class="tab" onclick="showTab('iocs')">Key IOCs</div>
+                    </div>
+                    
+                    <div id="anomalies" class="tab-content">
+                        <ul class="evidence-list">
+                            <li><strong>(High Confidence)</strong> <code>VPN-Gateway</code>: User 'admin' logged in from new geography (ASN: 15169).</li>
+                            <li><strong>(High Confidence)</strong> <code>AD-Server</code>: Process 'lsass.exe' spawned an unusual child process 'cmd.exe'.</li>
+                            <li><strong>(Medium Confidence)</strong> <code>Workstation-102</code>: Unusual outbound C2 connection to 172.217.14.228.</li>
+                        </ul>
+                    </div>
+                    <div id="alerts" class="tab-content" style="display:none;">
+                        <p>Showing 58 correlated raw alerts (from 1,247 total). <a href="screen1.html" style="color: #d9534f;">(View All)</a></p>
+                        <ul class="evidence-list">
+                            <li><code>A-99118</code>: (Critical) Possible Zero-Day Exploit</li>
+                            <li><code>A-99122</code>: (Medium) Anomalous Port Scan</li>
+                            <li><code>A-99117</code>: (Medium) Anomalous Port Scan</li>
+                        </ul>
+                    </div>
+                    <div id="iocs" class="tab-content" style="display:none;">
+                        <ul class="evidence-list">
+                            <li>IP: <code>172.217.14.228</code> (C2 Server)</li>
+                            <li>Hash: <code>e45...d8a</code> (malware.exe)</li>
+                            <li>Domain: <code>bad-guy-updates.com</code></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-column">
+                
+                <div class="widget playbook-widget">
+                    <div class="widget-header">
+                        <h3>Automated Playbook</h3>
+                    </div>
+                    <div class="widget-body">
+                        
+                        <div class="playbook-step">
+                            <div class="step-info">
+                                <p>1. Isolate Devices</p>
+                                <span>`AD-Server`, `Workstation-102`</span>
+                            </div>
+                            <a href="#" class="playbook-button" onclick="return false;">Execute</a>
+                        </div>
+                        
+                        <div class="playbook-step">
+                            <div class="step-info">
+                                <p>2. Deploy DPI</p>
+                                <span>`VPN-Gateway` (Deep Packet Inspection)</span>
+                            </div>
+                            <a href="#" class="playbook-button" onclick="return false;">Execute</a>
+                        </div>
+
+                        <div class="playbook-step">
+                            <div class="step-info">
+                                <p>3. Update SIEM Rules</p>
+                                <span>Push 3 new rules for this kill chain</span>
+                            </div>
+                            <a href="#" class="playbook-button btn-success" onclick="return false;">(Auto-Run)</a>
+                        </div>
+                        
+                        <div class="playbook-step">
+                            <div class="step-info">
+                                <p>4. Escalate to L3</p>
+                                <span>Page on-call L3 Analyst team</span>
+                            </div>
+                            <a href="#" class="playbook-button" onclick="return false;">Execute</a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+        </div> </div> <script>
+        // Simple, safe, self-contained JS for the tabs.
+        // This is not for routing, just for presentation.
+        function showTab(tabId) {
+            // Hide all tab content
+            document.getElementById('anomalies').style.display = 'none';
+            document.getElementById('alerts').style.display = 'none';
+            document.getElementById('iocs').style.display = 'none';
+            
+            // Deactivate all tabs
+            document.querySelectorAll('.tab').forEach(function(tab) {
+                tab.classList.remove('active');
+            });
+            
+            // Show the selected tab content
+            document.getElementById(tabId).style.display = 'block';
+            
+            // Activate the selected tab
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+
+</body>
+</html>

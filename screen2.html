@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PYAADA.AI - Prioritized Incidents</title>
+    <style>
+        /* --- Basic Setup (Red & Black Theme) --- */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #111111; /* Black Background */
+            color: #e0e0e0; /* Light Text */
+        }
+
+        /* --- Main Layout --- */
+        .container {
+            padding: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* --- Header --- */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #333; /* Darker border */
+            padding-bottom: 16px;
+        }
+        
+        /* --- NEW LOGO STYLE --- */
+        .logo {
+            height: 100px; /* You can adjust this height */
+            width: auto;
+            margin-right: 5px; /* Space between logo and title */
+        }
+        
+        .header-title-block {
+            display: flex;
+            align-items: center;
+        }
+
+        .header h1 {
+            color: #ffffff; /* White text */
+            margin: 0;
+            font-size: 1.8em;
+        }
+        .stats-box {
+            background-color: #0d4e1a; /* Dark Grey Box */
+            border: 1px solid #444;
+            color: #ffffff;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-align: right;
+        }
+        .stats-box h2 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+        .stats-box p {
+            margin: 0;
+            color: #aaa;
+        }
+        
+        .subheader {
+            margin: 24px 0;
+            font-size: 1.2em;
+            color: #aaa; /* Lighter grey text */
+        }
+
+        /* --- Incident Card Grid --- */
+        .incident-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+        
+        .incident-card {
+            background-color: #1a1a1a; /* Dark Card */
+            border: 1px solid #333;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .incident-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(217, 83, 79, 0.2); /* Red glow on hover */
+        }
+
+        .card-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid #333;
+        }
+        .card-header h3 {
+            margin: 0;
+            font-size: 1.3em;
+        }
+        
+        /* Critical Card Highlight */
+        .critical {
+            border-top: 4px solid #d9534f; /* Red */
+        }
+        .critical .card-header h3 {
+            color: #d9534f;
+        }
+
+        /* Medium Card Highlight */
+        .medium {
+            border-top: 4px solid #f0ad4e; /* Yellow */
+        }
+        .medium .card-header h3 {
+            color: #f0ad4e;
+        }
+
+        /* Low Card Highlight */
+        .informational {
+            border-top: 4px solid #5bc0de; /* Cyan */
+        }
+        .informational .card-header h3 {
+            color: #5bc0de;
+        }
+
+        .card-body {
+            padding: 20px;
+            flex-grow: 1; /* Pushes footer down */
+        }
+        .card-body p {
+            margin: 0 0 16px 0;
+            line-height: 1.6;
+            color: #ccc;
+        }
+        .tag-list span {
+            display: inline-block;
+            background-color: #333; /* Dark tag */
+            color: #e0e0e0;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.9em;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+
+        .card-footer {
+            padding: 16px 20px;
+            background-color: #222222; /* Darker footer */
+            border-top: 1px solid #333;
+            text-align: right;
+        }
+        
+        .investigate-button {
+            display: inline-block;
+            background-color: #d9534f; /* PYAADA.AI Red */
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1em;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 6px;
+            transition: background-color 0.2s ease;
+        }
+        .investigate-button:hover {
+            background-color: #c9302c; /* Darker Red */
+        }
+        .btn-disabled {
+            background-color: #444; /* Dark Grey for disabled */
+            color: #888;
+            cursor: not-allowed;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <div class="header-title-block">
+                <img src="image1.png" alt="PYAADA.AI Logo" class="logo">
+                <h1>PYAADA.AI</h1>
+            </div>
+            <div class="stats-box">
+                <h2>✅ 3</h2>
+                <p>Actionable Incidents (from 1,247 Alerts)</p>
+            </div>
+        </div>
+
+        <p class="subheader">
+            The "AI Analyst" has automatically correlated, de-duplicated, and prioritized all 1,247 raw alerts into the following high-level incidents.
+        </p>
+
+        <div class="incident-grid">
+
+            <div class="incident-card critical">
+                <div class="card-header">
+                    <h3>Incident #001: Suspected Zero-Day Exploit</h3>
+                </div>
+                <div class="card-body">
+                    <p>AI Analyst has linked <strong>58 alerts</strong> from <strong>4 devices</strong>. High-confidence behavioral anomalies detected. Possible kill chain in progress.</p>
+                    <div class="tag-list">
+                        <span>Zero-Day</span>
+                        <span>Behavioral Anomaly</span>
+                        <span>Kill Chain</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="screen3.html" class="investigate-button">Investigate</a>
+                </div>
+            </div>
+
+            <div class="incident-card medium">
+                <div class="card-header">
+                    <h3>Incident #002: Coordinated Phishing Attempt</h3>
+                </div>
+                <div class="card-body">
+                    <p><strong>24 user reports</strong> and <strong>12 IOCs</strong> have been automatically correlated. Attack appears to be contained by automated email filtering.</p>
+                    <div class="tag-list">
+                        <span>Phishing</span>
+                        <span>IOC Correlated</span>
+                        <span>Contained</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="investigate-button btn-disabled" onclick="return false;">(Contained)</a>
+                </div>
+            </div>
+
+            <div class="incident-card informational">
+                <div class="card-header">
+                    <h3>Incident #003: Low-Confidence Anomaly</h3>
+                </div>
+                <div class="card-body">
+                    <p>A single user on a new device triggered a low-confidence behavioral alert. Deprioritized for informational review.</p>
+                    <div class="tag-list">
+                        <span>Informational</span>
+                        <span>Deprioritized</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="investigate-button btn-disabled" onclick="return false;">(Informational)</a>
+                </div>
+            </div>
+
+        </div> </div> </body>
+</html>
